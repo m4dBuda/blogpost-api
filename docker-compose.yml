@@ -1,0 +1,18 @@
+services:
+  blogposts-db:
+    image: postgres
+    container_name: blogposts-container
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    ports:
+      - ${DATABASE_PORT}:5432
+    networks:
+      - app-network
+    volumes:
+      - .docker/pgdata:/var/lib/postgresql/data
+
+networks:
+  app-network:
+    driver: bridge
