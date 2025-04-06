@@ -5,7 +5,7 @@ export class UserCreatedDTO {
   name: string;
   username: string;
   email: string;
-  avatar: string;
+  avatar?: string | null;
   createdAt: Date;
   updatedAt: Date;
 

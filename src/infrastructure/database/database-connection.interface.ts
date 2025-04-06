@@ -1,5 +1,3 @@
-import { IUserRepository } from 'src/modules/user/interfaces/user-repository.interface';
+import { PrismaClient } from '@prisma/client';
 
-export interface IDatabaseConnection {
-  user: IUserRepository;
-}
+export interface IDatabaseConnection extends PrismaClient {}
