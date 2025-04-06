@@ -1,3 +1,5 @@
+import { IUserRepository } from 'src/modules/user/interfaces/user-repository.interface';
+
 export interface IDatabaseConnection {
-  // TODO: Remember to add the entities with their repository contract interfaces. =)
+  user: IUserRepository;
 }

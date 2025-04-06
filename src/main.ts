@@ -1,10 +1,9 @@
+import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe, Logger, INestApplication } from '@nestjs/common';
-import { MainModule } from './main.module';
-import compression from 'compression';
 import helmet from 'helmet';
-import { ResponseInterceptor } from './common/interceptors/http-response.interceptor';
 import { HttpExceptionFilter } from './common/exceptions/http-exceptions.filter';
+import { ResponseInterceptor } from './common/interceptors/http-response.interceptor';
+import { MainModule } from './main.module';
 
 async function bootstrap() {
   const logger = new Logger('BlogPostAPI');
@@ -34,7 +33,6 @@ bootstrap().catch((error) => {
  */
 function configureSecurity(app: INestApplication) {
   app.use(helmet());
-  app.use(compression());
 }
 
 /**
