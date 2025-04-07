@@ -1,8 +1,8 @@
 {
   "name": "blogpost-api",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "1.0.0",
+  "description": "Blog Post API using NestJS and Prisma",
+  "author": "João Otávio Carvalho Castejon",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
