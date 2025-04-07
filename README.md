@@ -207,8 +207,8 @@ This project follows a clean and modular architecture, leveraging several best p
    - Enhances security and simplifies environment-specific setups.
 
 10. **Testing**:
-    - Includes unit and end-to-end (e2e) tests to ensure code quality and reliability.
-    - Facilitates safe refactoring and regression testing.
+    - Includes unit tests to ensure code quality and reliability.
+    - Facilitates safe refactoring.
 
 ---
 
