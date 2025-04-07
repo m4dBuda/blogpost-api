@@ -68,6 +68,8 @@ Before starting, ensure you have the following tools installed:
    PORT=3000
    ```
 
+3. The deploy.yml file was created as an deploy pipeline example, but wont work. =)
+
 ---
 
 ## **Run the Database Container**
