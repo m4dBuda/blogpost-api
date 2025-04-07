@@ -10,6 +10,6 @@ import { ResponseInterceptor } from './interceptors/http-response.interceptor';
 @Global()
 @Module({
   providers: [HashHelper, JwtHelper, JwtService, ResponseInterceptor, HttpExceptionFilter, AuthGuard, UserRepository],
-  exports: [HashHelper, JwtHelper, ResponseInterceptor, HttpExceptionFilter, AuthGuard],
+  exports: [HashHelper, JwtHelper, ResponseInterceptor, HttpExceptionFilter, AuthGuard, UserRepository],
 })
 export class CommonModule {}

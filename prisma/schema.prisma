@@ -52,6 +52,8 @@ model Like {
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([postId, userId], name: "unique_post_user_like")
 }
 
 model Image {

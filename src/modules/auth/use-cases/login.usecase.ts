@@ -1,4 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { HashHelper } from 'src/common/helpers/hash.helper';
 import { JwtHelper } from 'src/common/helpers/jwt.helper';
 import { IUserRepository } from 'src/modules/user/interfaces/user-repository.interface';
@@ -22,14 +28,14 @@ export class LoginUseCase {
       const token = await this.generateToken(user);
       return new AuthDTO(user.id, token);
     } catch (error) {
-      throw new Error(`Login failed: ${error.message}`);
+      throw new InternalServerErrorException(`Login failed: ${error.message}`);
     }
   }
 
   private async validateUser(email: string): Promise<UserEntity> {
     const user = await this.userRepository.findByEmail(email);
     if (!user) {
-      throw new Error('User not found');
+      throw new NotFoundException('User not found');
     }
     return user;
   }
@@ -37,7 +43,7 @@ export class LoginUseCase {
   private async validatePassword(user: UserEntity, password: string): Promise<boolean> {
     const isValid = await this.hashHelper.compare(password, user.password);
     if (!isValid) {
-      throw new Error('Invalid password');
+      throw new UnauthorizedException('Invalid password');
     }
     return isValid;
   }

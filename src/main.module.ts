@@ -5,6 +5,7 @@ import { InfrastructureModule } from './infrastructure/infrastructure.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { BlogpostModule } from './modules/blogpost/blogpost.module';
 import { HealthModule } from './modules/health/health.module';
+import { LikeModule } from './modules/like/like.module';
 import { UserModule } from './modules/user/user.module';
 
 @Module({
@@ -19,6 +20,7 @@ import { UserModule } from './modules/user/user.module';
     AuthModule,
     UserModule,
     BlogpostModule,
+    LikeModule,
   ],
 })
 export class MainModule {}

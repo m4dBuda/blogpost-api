@@ -1,4 +1,4 @@
-import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { BlogPostRepository } from '../blogpost.repository';
 import { BlogPostDTO } from '../dtos/outputs/blogpost.dto';
 
@@ -9,7 +9,7 @@ export class GetBlogPostByIdUseCase {
     try {
       const post = await this.blogPostRepository.getPostById(id);
       if (!post) {
-        throw new InternalServerErrorException(`Blog post with ID ${id} not found`);
+        throw new NotFoundException(`Blog post with ID ${id} not found`);
       }
 
       const likeCount = post.likes?.length || 0;

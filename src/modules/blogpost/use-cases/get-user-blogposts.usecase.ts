@@ -9,6 +9,9 @@ export class GetUserBlogPostsUseCase {
   public async execute(authorId: string): Promise<BlogPostDTO[]> {
     try {
       const posts = await this.blogPostRepository.getPostsByAuthor(authorId);
+      if (!posts || posts.length === 0) {
+        return [];
+      }
 
       return posts.map((post) => {
         const likeCount = post.likes?.length || 0;
