@@ -17,12 +17,6 @@ export class JwtHelper {
     this.expiresIn = process.env.JWT_EXPIRES_IN || '3600';
   }
 
-  /**
-   * Generates a JWT token with the given payload.
-   * @param payload - The payload to include in the token.
-   * @param expiresIn - Optional expiration time in seconds (overrides default).
-   * @returns The generated JWT token.
-   */
   public generateToken(payload: object, expiresIn?: number): string {
     const token: string = this.jwtService.sign(payload, {
       secret: this.secret,
@@ -31,11 +25,6 @@ export class JwtHelper {
     return token;
   }
 
-  /**
-   * Verifies a JWT token.
-   * @param token - The JWT token to verify.
-   * @returns The decoded payload if the token is valid.
-   */
   public verifyToken(token: string): TokenDTO {
     return this.jwtService.verify(token, { secret: this.secret });
   }
