@@ -19,7 +19,7 @@ The **BlogPost API** is a backend application built with **NestJS** to manage bl
 
 Before starting, ensure you have the following tools installed:
 
-- [Node.js](https://nodejs.org/) (version 16 or higher)
+- [Node.js](https://nodejs.org/) (API uses 22.14.0 I strongly advise you to use NVM)
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
 - [Git](https://git-scm.com/)
@@ -72,6 +72,52 @@ Before starting, ensure you have the following tools installed:
 
 ---
 
+## **Alternative Method to Start and Stop the Application**
+
+You can use the provided scripts to simplify the process of starting and stopping the application and its dependencies.
+
+### **Start the Application**
+
+1. Run the `setup-dev.sh` script to:
+
+   - Configure the Node.js version using NVM.
+   - Install project dependencies.
+   - Start the database container using Docker.
+   - Run database migrations.
+   - Start the application.
+
+   ```bash
+   ./scripts/setup-dev.sh
+   ```
+
+2. The script will:
+
+   - Ensure the database is running.
+   - Apply the latest database migrations.
+   - Start the application in development mode.
+   - Call the health check endpoint to verify the application is running.
+
+3. After running the script, the API will be available at: [http://localhost:3000](http://localhost:3000).
+
+---
+
+### **Stop the Application**
+
+1. Run the `teardown-dev.sh` script to:
+
+   - Stop the application running on port `3000`.
+   - Stop and remove the database container.
+
+   ```bash
+   ./scripts/teardown-dev.sh
+   ```
+
+2. The script will:
+   - Check if the application is running on port `3000` and stop it.
+   - Stop all Docker containers defined in the `docker-compose.yml` file.
+
+---
+
 ## **Run the Database Container**
 
 1. Ensure Docker is installed and running.
@@ -88,6 +134,8 @@ Before starting, ensure you have the following tools installed:
    ```
 
 ---
+
+## **Manual Method to Start the Application**
 
 ## **Run Migrations**
 
