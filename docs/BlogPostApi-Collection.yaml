@@ -1,0 +1,537 @@
+type: collection.insomnia.rest/5.0
+name: Blog Posts API
+meta:
+  id: wrk_bc7da6e2053d473bbc53002b29cbcc6a
+  created: 1743971635015
+  modified: 1743971635015
+collection:
+  - name: User
+    meta:
+      id: fld_5f16263baedc4953901a305e8b926122
+      created: 1743981456864
+      modified: 1743981456864
+      sortKey: -1743981456864
+    children:
+      - url: '{{base_url}}/user'
+        name: Create User
+        meta:
+          id: req_546eb260b3bb41df892950ad54679ad8
+          created: 1743981480544
+          modified: 1743990399118
+          isPrivate: false
+          sortKey: -1743981869239
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Luara Castejon",
+            	"email": "fisio.luara@gmail.com",
+            	"password": ""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: '{{base_url}}/user'
+        name: Get User By Id
+        meta:
+          id: req_437884f3e0c24072b8c6fa3d919a3614
+          created: 1743982098191
+          modified: 1743999484080
+          isPrivate: false
+          sortKey: -1743976754306
+        method: GET
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Joao Otavio Castejon",
+            	"email": "otavioc.dev@gmail.com",
+            	"password": "",
+            	"avatar": ""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          token: '{{token}}'
+          prefix: Bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Auth
+    meta:
+      id: fld_19daac4d9fad411d94510581e6feb00d
+      created: 1743981461818
+      modified: 1743997901767
+      sortKey: -1743981461818
+    children:
+      - url: '{{base_url}}/auth/login'
+        name: Login
+        meta:
+          id: req_78ba530fd142402395df74a3fb91de45
+          created: 1743981872144
+          modified: 1743990624864
+          isPrivate: false
+          sortKey: -1743982001738
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email": "fisio.luara@gmail.com",
+            	"password": ""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        scripts:
+          afterResponse: |
+
+            const jsonBody = insomnia.response.json();
+
+            insomnia.environment.set("user_id", jsonBody.data.userId);
+            insomnia.environment.set("token", jsonBody.data.token);
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Posts
+    meta:
+      id: fld_f3ebfa58fef04cb09586be171fa824a3
+      created: 1743981467190
+      modified: 1743981467190
+      sortKey: -1743981467190
+    children:
+      - url: '{{base_url}}/post'
+        name: Create Post
+        meta:
+          id: req_8f0b626e3c76416594c755538d687d96
+          created: 1743984420552
+          modified: 1743990985520
+          isPrivate: false
+          sortKey: -1743984423328
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Hey Im also here!",
+            	"content": "Meow",
+            	"published": true	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          prefix: Bearer
+          token: '{{token}}'
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: '{{base_url}}/post/:id'
+        name: Update Post
+        meta:
+          id: req_cd9c8a98fed04652b3ab23502aaad4fc
+          created: 1743988751941
+          modified: 1743990988525
+          isPrivate: false
+          sortKey: -1743983212533
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Updating my Hello World Post!"
+            }
+        parameters:
+          - id: pair_6e14eabf481b492e946b7a7c4b97ec4e
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          prefix: Bearer
+          token: '{{token}}'
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: id
+            value: cm96d1xng0001oi7adr779s6j
+      - url: '{{base_url}}/post/author/:authorId'
+        name: Get User Posts
+        meta:
+          id: req_c1378e0fefb2489290fc50290b71821d
+          created: 1743988838043
+          modified: 1743999746998
+          isPrivate: false
+          sortKey: -1743982607135.5
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          prefix: Bearer
+          token: '{{token}}'
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: authorId
+            value: cm969mwcu0000oixndgwy4hg1
+      - url: '{{base_url}}/post'
+        name: Get Posts
+        meta:
+          id: req_af86f52e71624ac09393d311648ac768
+          created: 1743988885866
+          modified: 1743990788594
+          isPrivate: false
+          sortKey: -1743982304436.75
+        method: GET
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Updating my Hello World Post!"
+            }
+        parameters:
+          - id: pair_eadf4d4e0b6f4aa2bfec66d79a0c5063
+            name: title
+            value: Hello
+            disabled: true
+          - id: pair_f2e50687b96249c3bcbc1b2e3b4b9d01
+            name: page
+            value: '1'
+            disabled: false
+          - id: pair_add2b706595a45c59a83dbf11e50cb4b
+            name: limit
+            value: '10'
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          prefix: Bearer
+          token: '{{token}}'
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: '{{base_url}}/post/:id'
+        name: Get Post by ID
+        meta:
+          id: req_8134eff03d104126931579c068117957
+          created: 1743990981917
+          modified: 1743999732538
+          isPrivate: false
+          sortKey: -1743982455786.125
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          prefix: Bearer
+          token: '{{token}}'
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: id
+            value: cm96f2ws80001oilrivi757kr
+      - url: '{{base_url}}/post/:id'
+        name: Delete Post
+        meta:
+          id: req_2725c56ec8c44b93a1e536e647f82afd
+          created: 1743999702709
+          modified: 1743999722861
+          isPrivate: false
+          sortKey: -1743982153087.375
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Updating my Hello World Post!"
+            }
+        parameters:
+          - id: pair_aaf69081d66d4f4faf5902f39071e436
+            disabled: true
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          prefix: Bearer
+          token: '{{token}}'
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: id
+  - name: Likes
+    meta:
+      id: fld_8a19b0d985514b38ad2bc92aeaabf604
+      created: 1743981475321
+      modified: 1743981475321
+      sortKey: -1743981475321
+    children:
+      - url: '{{base_url}}/like/:postId'
+        name: Like Post
+        meta:
+          id: req_78c7ebd6f1fb4a64b65b62dcfc88d007
+          created: 1743994843395
+          modified: 1743997245048
+          isPrivate: false
+          sortKey: -1743996438939
+        method: POST
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          prefix: Bearer
+          token: '{{token}}'
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: postId
+            value: cm96f2ws80001oilrivi757kr
+      - url: '{{base_url}}/like/:postId'
+        name: Get Likes by Post Id
+        meta:
+          id: req_c837a43cf5214b078f48e4e70310f4b6
+          created: 1743995004118
+          modified: 1743998819931
+          isPrivate: false
+          sortKey: -1743996439039
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          prefix: Bearer
+          token: '{{token}}'
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: postId
+            value: cm96f2ws80001oilrivi757kr
+  - name: Comments
+    meta:
+      id: fld_e8d03ee67a314e0d94d713e406b5a919
+      created: 1743996452729
+      modified: 1743996452729
+      sortKey: -1743996452729
+    children:
+      - url: '{{base_url}}/comment'
+        name: Create Comment
+        meta:
+          id: req_264d55c7884548cb978769d3c91ceae2
+          created: 1743996457461
+          modified: 1743998746754
+          isPrivate: false
+          sortKey: -1743996464907
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"postId": "cm96f2ws80001oilrivi757kr",
+            	"content": "Hello Kitty!!! <3"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          token: '{{token}}'
+          prefix: Bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: '{{base_url}}/comment/:id'
+        name: Update Comment
+        meta:
+          id: req_6ed2c306a97b484d81a57e2a36483aa4
+          created: 1743997364116
+          modified: 1743998425520
+          isPrivate: false
+          sortKey: -1743996451973
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"content": "Lets hangout!"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          token: '{{token}}'
+          prefix: Bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: id
+            value: cm96jkxqa0001oikozzkafgtw
+      - url: '{{base_url}}/comment/:id'
+        name: Delete Comment
+        meta:
+          id: req_e21bc7ecbe0e4d5592478f06acf3ef05
+          created: 1743998691443
+          modified: 1743998724878
+          isPrivate: false
+          sortKey: -1743996445506
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        authentication:
+          type: bearer
+          token: '{{token}}'
+          prefix: Bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+        pathParameters:
+          - name: id
+            value: cm96jkxqa0001oikozzkafgtw
+  - url: '{{base_url}}/health'
+    name: Health Check
+    meta:
+      id: req_97f67f4be0374efb9fc5bfda00f05f05
+      created: 1743971639373
+      modified: 1743971988277
+      isPrivate: false
+      sortKey: -1743971639373
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.1
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_a2236de3dcf630495d76964cd7dbfe9354b97052
+    created: 1743971635020
+    modified: 1743997901761
+environments:
+  name: Base Environment
+  meta:
+    id: env_a2236de3dcf630495d76964cd7dbfe9354b97052
+    created: 1743971635019
+    modified: 1743997901766
+    isPrivate: false
+  data:
+    base_url: localhost:3000/api/v1
+    token:
+    user_id:
