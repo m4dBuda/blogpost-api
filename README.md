@@ -1,98 +1,310 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Blog Post API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+The **BlogPost API** is a backend application built with **NestJS** to manage blog posts, comments, likes, and user authentication. This project is designed to be scalable, efficient, and easy to use.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## **Features**
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Posts**: Create, update, list, and delete blog posts.
+- **Comments**: Create, update and delete comments to posts.
+- **Likes**: Like or unlike posts and listings.
+- **Authentication**: Manages authentication.
+- **User**: Sign up new user.
+- **Health Check**: Monitor the health of the API.
 
-## Project setup
+---
 
-```bash
-$ npm install
+## **Prerequisites**
+
+Before starting, ensure you have the following tools installed:
+
+- [Node.js](https://nodejs.org/) (version 16 or higher)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Git](https://git-scm.com/)
+
+---
+
+## **How to Clone the Project**
+
+1. Clone the repository to your local machine:
+
+   ```bash
+   git clone https://github.com/your-username/blogpost-api.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd blogpost-api
+   ```
+
+---
+
+## **Install Dependencies**
+
+1. Install the project dependencies using `npm`:
+
+   ```bash
+   npm install
+   ```
+
+---
+
+## **Environment Configuration**
+
+1. Create a `.env` file in the root directory based on the `.env.example` file:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Configure the environment variables in the `.env` file. Example:
+
+   ```env
+   DATABASE_URL=postgresql://user:password@localhost:5432/blogpost
+   JWT_SECRET=your-jwt-secret
+   PORT=3000
+   ```
+
+---
+
+## **Run the Database Container**
+
+1. Ensure Docker is installed and running.
+2. Start the PostgreSQL database container using Docker Compose:
+
+   ```bash
+   docker-compose up -d
+   ```
+
+3. Verify the container is running:
+
+   ```bash
+   docker ps
+   ```
+
+---
+
+## **Run Migrations**
+
+1. Generate the database tables using Prisma:
+
+   ```bash
+   npx prisma migrate dev
+   ```
+
+2. Optionally, visualize the database with Prisma Studio:
+
+   ```bash
+   npx prisma studio
+   ```
+
+---
+
+## **Start the API**
+
+1. Start the server in development mode:
+
+   ```bash
+   npm run start:dev
+   ```
+
+2. The API will be available at: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## **How to Make Requests**
+
+### **Authentication**
+
+1. Register a new user:
+
+   **POST** `/user`
+
+   ```json
+   {
+     "name": "John Doe",
+     "email": "johndoe@example.com",
+     "password": "securepassword"
+   }
+   ```
+
+2. Log in to obtain the JWT token:
+
+   **POST** `/auth/login`
+
+   ```json
+   {
+     "email": "johndoe@example.com",
+     "password": "securepassword"
+   }
+   ```
+
+   **Response**:
+
+   ```json
+   {
+     "operation": "success",
+     "message": "Request successful",
+     "timestamp": "2025-04-07T00:24:55.174Z",
+     "token": "your-jwt-token"
+   }
+   ```
+
+3. Use the JWT token in the `Authorization` header to authenticate requests:
+
+   ```http
+   Authorization: Bearer your-jwt-token
+   ```
+
+---
+
+### **Example Endpoints**
+
+#### **Create a Post**
+
+**POST** `/post`
+
+```json
+{
+  "title": "My First Post",
+  "content": "This is the content of my post.",
+  "published": true
+}
 ```
 
-## Compile and run the project
+#### **List Posts**
 
-```bash
-# development
-$ npm run start
+**GET** `/post`
 
-# watch mode
-$ npm run start:dev
+---
 
-# production mode
-$ npm run start:prod
+#### **Add a Comment**
+
+**POST** `/comment`
+
+```json
+{
+  "postId": "123e4567-e89b-12d3-a456-426614174000",
+  "content": "This is a comment."
+}
 ```
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ npm run test
+#### **Like a Post**
 
-# e2e tests
-$ npm run test:e2e
+**POST** `/like/:postId`
 
-# test coverage
-$ npm run test:cov
+---
+
+## **Run Tests**
+
+1. Run unit tests:
+
+   ```bash
+   npm run test
+   ```
+
+---
+
+## **Project Structure**
+
+```plaintext
+src/
+├── common/             # Shared code (guards, helpers, utils, etc.)
+├── infrastructure/     # Infrastructure-related files (e.g., database connection)
+├── modules/            # API modules, separated by entities
+│   ├── auth/           # Authentication module
+│   ├── blogpost/       # Blog post module
+│   ├── comment/        # Comment module
+│   ├── health/         # Health check module
+│   ├── like/           # Like module
+│   └── user/           # User module
+├── main.ts             # Application entry point
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## **Resources**
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+- [NestJS Documentation](https://docs.nestjs.com)
+- [Prisma ORM Documentation](https://www.prisma.io/docs)
+- [Docker Compose Documentation](https://docs.docker.com/compose/)
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+---
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## **Architecture and Design Choices**
 
-## Resources
+This project follows a clean and modular architecture, leveraging several best practices and design patterns to ensure scalability, maintainability, and testability.
 
-Check out a few resources that may come in handy when working with NestJS:
+### **Key Practices and Patterns**
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+1. **Modularization**:
 
-## Support
+   - Each feature is encapsulated in its own module (e.g., `auth`, `blogpost`, `comment`, etc.).
+   - Promotes separation of concerns and makes the codebase easier to scale and maintain.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+2. **Infrastructure Layer**:
 
-## Stay in touch
+   - Centralized in the `infrastructure` folder for managing critical configurations like database connections.
+   - Simplifies swapping or updating infrastructure components.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+3. **DTOs (Data Transfer Objects)**:
 
-## License
+   - Used to define the structure of data entering and leaving the API.
+   - Ensures data consistency and prevents sensitive information from being exposed.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+4. **Use Cases**:
+
+   - Encapsulates business logic in dedicated classes (e.g., `ToggleLikeUseCase`, `GetUserBlogPostsUseCase`).
+   - Keeps controllers lightweight and focused on handling HTTP requests.
+
+5. **Repository Pattern**:
+
+   - Abstracts database interactions into repositories (e.g., `BlogPostRepository`, `LikeRepository`).
+   - Decouples business logic from persistence logic, improving flexibility and testability.
+
+6. **Guards and Middleware**:
+
+   - Guards like `AuthGuard` ensure secure access to protected routes.
+   - Middleware like `helmet` and `cors` enhance security and control over API access.
+
+7. **Global Interceptors and Filters**:
+
+   - Interceptors standardize API responses.
+   - Filters handle errors consistently across the application.
+
+8. **Prisma ORM**:
+
+   - Simplifies database interactions with a declarative schema and migration system.
+   - Ensures the database schema stays synchronized with the application.
+
+9. **Environment Variables**:
+
+   - Sensitive configurations (e.g., `DATABASE_URL`, `JWT_SECRET`) are managed via `.env` files.
+   - Enhances security and simplifies environment-specific setups.
+
+10. **Testing**:
+    - Includes unit and end-to-end (e2e) tests to ensure code quality and reliability.
+    - Facilitates safe refactoring and regression testing.
+
+---
+
+### **Benefits**
+
+- **Scalability**: Modular design allows for easy addition of new features.
+- **Maintainability**: Clear separation of concerns simplifies debugging and updates.
+- **Security**: Guards, middleware, and environment variables protect sensitive data and endpoints.
+- **Testability**: Use cases and repositories are isolated, making them easy to test.
+- **Consistency**: DTOs and interceptors ensure uniform data handling and responses.
+
+This architecture ensures the API is robust, secure, and ready for future growth.
+
+## **Developer**
+
+Created and maintained by:
+
+[**João Otávio Carvalho Castejon**](https://www.linkedin.com/in/jo%C3%A3o-ot%C3%A1vio-carvalho-castejon-164023151/)
