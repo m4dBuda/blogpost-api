@@ -165,7 +165,7 @@ You can use the provided scripts to simplify the process of starting and stoppin
 
 3. The API uses the prefix `api/v1` to facilitate version control.
 
-4. A pre-configured API collection is available for testing and can be imported into [Insomnia](https://insomnia.rest/) or similar tools. The collection is located in the `docs/Insomnia_2025-04-07.har` file.
+4. A pre-configured API collection is available for testing and can be imported into [Insomnia](https://insomnia.rest/) or similar tools. The collection is located in the `docs/BlogPostApi-Collection.yaml` file.
 
 ---
 
