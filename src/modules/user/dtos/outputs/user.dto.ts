@@ -17,7 +17,7 @@ export class UserDTO {
   likes?: Partial<LikeEntity>[];
   comments?: Partial<CommentEntity>[];
 
-  constructor(user: UserEntity, data?: { postCount?: number; likeCount?: number; commentCount?: number }) {
+  constructor(user: UserEntity, options?: { postCount?: number; likeCount?: number; commentCount?: number }) {
     this.id = user.id;
     this.name = user.name;
     this.email = user.email;
@@ -25,9 +25,9 @@ export class UserDTO {
     this.updatedAt = user.updatedAt;
     this.avatar = user.avatar;
 
-    this.postCount = data?.postCount;
-    this.likeCount = data?.likeCount;
-    this.commentCount = data?.commentCount;
+    this.postCount = options?.postCount;
+    this.likeCount = options?.likeCount;
+    this.commentCount = options?.commentCount;
 
     this.posts = user?.posts ?? undefined;
     this.likes = user?.likes ?? undefined;

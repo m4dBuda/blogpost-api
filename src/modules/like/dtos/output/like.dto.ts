@@ -1,3 +1,5 @@
+import { BlogPostEntity } from 'src/modules/blogpost/blogpost.entity';
+import { UserEntity } from 'src/modules/user/user.entity';
 import { LikeEntity } from '../../like.entity';
 
 export class LikeDTO {
@@ -7,11 +9,29 @@ export class LikeDTO {
   createdAt: Date;
   updatedAt: Date;
 
-  constructor(data: LikeEntity) {
+  likeCount?: number;
+  user?: Partial<UserEntity>;
+  post?: Partial<BlogPostEntity>;
+  action?: 'liked' | 'unliked';
+
+  constructor(
+    data: LikeEntity,
+    options?: {
+      action?: 'liked' | 'unliked';
+      likeCount?: number;
+      user?: Partial<UserEntity>;
+      post?: Partial<BlogPostEntity>;
+    },
+  ) {
     this.id = data.id;
     this.userId = data.userId;
     this.postId = data.postId;
     this.createdAt = data.createdAt;
     this.updatedAt = data.updatedAt;
+
+    this.action = options?.action;
+    this.likeCount = options?.likeCount;
+    this.user = options?.user;
+    this.post = options?.post;
   }
 }

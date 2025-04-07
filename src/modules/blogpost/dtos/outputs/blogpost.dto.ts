@@ -17,7 +17,7 @@ export class BlogPostDTO {
   comments?: Partial<CommentEntity>[];
   likes?: Partial<LikeEntity>[];
 
-  constructor(data: BlogPostEntity, additionalData?: Partial<BlogPostDTO>) {
+  constructor(data: BlogPostEntity, options?: Partial<BlogPostDTO>) {
     this.id = data.id;
     this.title = data.title;
     this.content = data.content;
@@ -27,8 +27,8 @@ export class BlogPostDTO {
     this.createdAt = data.createdAt;
     this.updatedAt = data.updatedAt;
 
-    this.likeCount = additionalData?.likeCount;
-    this.commentCount = additionalData?.commentCount;
+    this.likeCount = options?.likeCount;
+    this.commentCount = options?.commentCount;
 
     this.author = data.author ?? undefined;
     this.likes = data.likes ?? undefined;

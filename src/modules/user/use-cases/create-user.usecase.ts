@@ -1,4 +1,4 @@
-import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { HashHelper } from 'src/common/helpers/hash.helper';
 import { CreateUserDTO } from '../dtos/inputs/create-user.dto';
 import { UserCreatedDTO } from '../dtos/outputs/user-created.dto';
@@ -20,7 +20,7 @@ export class CreateUserUseCase {
       const response = await this.userRepository.create(data);
       return new UserCreatedDTO(response);
     } catch (error) {
-      throw new InternalServerErrorException(`Error creating user: ${error.message}`);
+      throw new HttpException(`Error creating user: ${error.message}`, error.status || 500);
     }
   }
 

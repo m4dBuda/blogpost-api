@@ -1,4 +1,4 @@
-import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { LikeDTO } from '../dtos/output/like.dto';
 import { ILikeRepository } from '../interfaces/like-repository.interface';
 import { LikeRepository } from '../like.repository';
@@ -13,11 +13,11 @@ export class GetLikesByPostIdUseCase {
       if (!likes || likes.length === 0) {
         return [];
       }
-      return likes.map((like) => {
-        return new LikeDTO(like);
-      });
+
+      const likeCount = likes.length;
+      return likes.map((like) => new LikeDTO(like, { likeCount, post: like.post }));
     } catch (error) {
-      throw new InternalServerErrorException(`Error fetching likes by post ID: ${error.message}`);
+      throw new HttpException(`Error fetching likes by post ID: ${error.message}`, error.status || 500);
     }
   }
 }

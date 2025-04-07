@@ -6,8 +6,8 @@ import { CreateBlogPostDTO } from './dtos/inputs/create-blogpost.dto';
 import { UpdateBlogPostDTO } from './dtos/inputs/update-blogpost.dto';
 import { BlogPostDTO } from './dtos/outputs/blogpost.dto';
 import { CreateBlogPostUseCase } from './use-cases/create-blogpost.usecase';
+import { GetBlogPostByIdUseCase } from './use-cases/get-blogpost-by-id.usecase';
 import { GetBlogPostsUseCase } from './use-cases/get-blogposts.usecase';
-import { GetBlogPostByIdUseCase } from './use-cases/get-post-by-id.usecase';
 import { GetUserBlogPostsUseCase } from './use-cases/get-user-blogposts.usecase';
 import { UpdateBlogPostUseCase } from './use-cases/update-blogpost.usecase';
 
@@ -29,8 +29,7 @@ export class BlogPostController {
 
   @Post()
   public async createPost(@Body() data: CreateBlogPostDTO, @Request() req: AuthenticatedRequest): Promise<BlogPostDTO> {
-    const authorId = req.user.id;
-    data.authorId = authorId;
+    data.authorId = req.user.id;
     return this.$create.execute(data);
   }
 
@@ -44,9 +43,8 @@ export class BlogPostController {
     return this.$getById.execute(id);
   }
 
-  @Get('author')
-  public async getPostsByAuthor(@Request() req: AuthenticatedRequest): Promise<BlogPostDTO[]> {
-    const authorId = req.user.id;
+  @Get('author/:authorId')
+  public async getPostsByAuthor(@Param('authorId') authorId: string): Promise<BlogPostDTO[]> {
     return this.$getAllByUser.execute(authorId);
   }
 
@@ -56,8 +54,7 @@ export class BlogPostController {
     @Body() data: UpdateBlogPostDTO,
     @Request() req: AuthenticatedRequest,
   ): Promise<BlogPostDTO> {
-    const authorId = req.user.id;
-    data.authorId = authorId;
+    data.authorId = req.user.id;
     return this.$update.execute(id, data);
   }
 }

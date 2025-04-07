@@ -1,11 +1,12 @@
-import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { BlogPostRepository } from '../blogpost.repository';
 import { BlogPostFilterDTO } from '../dtos/inputs/blogpost-filter.dto';
 import { BlogPostDTO } from '../dtos/outputs/blogpost.dto';
+import { IBlogPostRepository } from '../interfaces/blogpost-repository.interface';
 
 @Injectable()
 export class GetBlogPostsUseCase {
-  constructor(@Inject(BlogPostRepository) private readonly blogPostRepository: BlogPostRepository) {}
+  constructor(@Inject(BlogPostRepository) private readonly blogPostRepository: IBlogPostRepository) {}
 
   public async execute(filter?: BlogPostFilterDTO): Promise<BlogPostDTO[]> {
     try {
@@ -21,7 +22,7 @@ export class GetBlogPostsUseCase {
         return new BlogPostDTO(post, { likeCount, commentCount });
       });
     } catch (error) {
-      throw new InternalServerErrorException(`Error fetching blog posts: ${error.message}`);
+      throw new HttpException(`Error fetching blog posts: ${error.message}`, error.status || 500);
     }
   }
 }

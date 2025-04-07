@@ -78,6 +78,7 @@ export class BlogPostRepository implements IBlogPostRepository {
           select: {
             id: true,
             content: true,
+            authorId: true,
             createdAt: true,
             updatedAt: true,
           },
@@ -86,6 +87,7 @@ export class BlogPostRepository implements IBlogPostRepository {
           select: {
             id: true,
             postId: true,
+            userId: true,
             createdAt: true,
             updatedAt: true,
           },

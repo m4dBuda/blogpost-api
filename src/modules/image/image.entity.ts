@@ -11,26 +11,12 @@ export class ImageEntity {
   createdAt: Date;
   updatedAt: Date;
 
-  constructor({
-    id,
-    url,
-    targetId,
-    targetType,
-    createdAt,
-    updatedAt,
-  }: {
-    id: string;
-    url: string;
-    targetId: string;
-    targetType: TargetType;
-    createdAt: Date;
-    updatedAt: Date;
-  }) {
-    this.id = id;
-    this.url = url;
-    this.targetId = targetId;
-    this.targetType = targetType;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+  constructor(data: ImageEntity) {
+    this.id = data.id!;
+    this.url = data.url!;
+    this.targetId = data.targetId!;
+    this.targetType = data.targetType!;
+    this.createdAt = data.createdAt!;
+    this.updatedAt = data.updatedAt!;
   }
 }

@@ -1,10 +1,14 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-export class LikePostDTO {
-  @IsNotEmpty()
+export class CreateCommentDTO {
   @IsString()
+  @IsNotEmpty()
   postId: string;
 
+  @IsString()
+  @IsNotEmpty()
+  content: string;
+
   @IsOptional()
-  userId: string;
+  authorId: string;
 }

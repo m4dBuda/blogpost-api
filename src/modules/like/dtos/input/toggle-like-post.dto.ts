@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-export class UnlikePostDTO {
+export class ToggleLikePostDTO {
   @IsNotEmpty()
   @IsString()
   postId: string;

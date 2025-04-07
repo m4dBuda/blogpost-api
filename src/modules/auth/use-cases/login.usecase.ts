@@ -1,10 +1,4 @@
-import {
-  Inject,
-  Injectable,
-  InternalServerErrorException,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { HttpException, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { HashHelper } from 'src/common/helpers/hash.helper';
 import { JwtHelper } from 'src/common/helpers/jwt.helper';
 import { IUserRepository } from 'src/modules/user/interfaces/user-repository.interface';
@@ -28,7 +22,7 @@ export class LoginUseCase {
       const token = await this.generateToken(user);
       return new AuthDTO(user.id, token);
     } catch (error) {
-      throw new InternalServerErrorException(`Login failed: ${error.message}`);
+      throw new HttpException(`Login failed: ${error.message}`, error.status || 500);
     }
   }
 

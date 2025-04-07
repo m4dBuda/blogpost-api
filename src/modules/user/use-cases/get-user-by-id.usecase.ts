@@ -1,4 +1,4 @@
-import { Inject, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { HttpException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { UserDTO } from '../dtos/outputs/user.dto';
 import { IUserRepository } from '../interfaces/user-repository.interface';
 import { UserRepository } from '../user.repository';
@@ -28,7 +28,7 @@ export class GetUserByIdUseCase {
         commentCount,
       });
     } catch (error) {
-      throw new InternalServerErrorException(`Error retrieving user: ${error.message}`);
+      throw new HttpException(`Error retrieving user: ${error.message}`, error.status || 500);
     }
   }
 }

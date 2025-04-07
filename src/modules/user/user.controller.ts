@@ -1,4 +1,6 @@
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Post, Request, UseGuards } from '@nestjs/common';
+import { AuthenticatedRequest } from 'src/common/dtos/authenticated-request.dto';
+import { AuthGuard } from 'src/common/guards/auth.guard';
 import { CreateUserDTO } from './dtos/inputs/create-user.dto';
 import { UserCreatedDTO } from './dtos/outputs/user-created.dto';
 import { UserDTO } from './dtos/outputs/user.dto';
@@ -17,8 +19,10 @@ export class UserController {
     return this.$create.execute(data);
   }
 
-  @Get(':id')
-  public async getById(@Param('id') id: string): Promise<UserDTO> {
+  @UseGuards(AuthGuard)
+  @Get()
+  public async getById(@Request() req: AuthenticatedRequest): Promise<UserDTO> {
+    const id = req.user.id;
     return this.$getById.execute(id);
   }
 }

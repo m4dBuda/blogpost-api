@@ -5,38 +5,20 @@ export class CommentEntity {
   id: string;
   content: string;
   authorId: string;
-  author: UserEntity;
   postId: string;
-  post: BlogPostEntity;
   createdAt: Date;
   updatedAt: Date;
+  author?: Partial<UserEntity>;
+  post?: Partial<BlogPostEntity>;
 
-  constructor({
-    id,
-    content,
-    authorId,
-    author,
-    postId,
-    post,
-    createdAt,
-    updatedAt,
-  }: {
-    id: string;
-    content: string;
-    authorId: string;
-    author: UserEntity;
-    postId: string;
-    post: BlogPostEntity;
-    createdAt: Date;
-    updatedAt: Date;
-  }) {
-    this.id = id;
-    this.content = content;
-    this.authorId = authorId;
-    this.author = author;
-    this.postId = postId;
-    this.post = post;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+  constructor(data: CommentEntity) {
+    this.id = data.id!;
+    this.content = data.content!;
+    this.authorId = data.authorId!;
+    this.postId = data.postId!;
+    this.createdAt = data.createdAt!;
+    this.updatedAt = data.updatedAt!;
+    this.author = data.author;
+    this.post = data.post;
   }
 }
