@@ -8,8 +8,8 @@ export class DeleteCommentUseCase {
   constructor(@Inject(CommentRepository) private readonly commentRepository: ICommentRepository) {}
 
   public async execute(id: string, authorId: string): Promise<CommentDTO> {
+    await this.findCommentAndValidate(id, authorId);
     try {
-      await this.findCommentAndValidate(id, authorId);
       const response = await this.commentRepository.deleteComment(id);
       const likeCount = response.post?.likes?.length;
       return new CommentDTO(response, { likeCount });

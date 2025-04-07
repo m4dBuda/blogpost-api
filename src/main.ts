@@ -1,9 +1,6 @@
 import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
-import * as fs from 'fs';
 import helmet from 'helmet';
-import * as yaml from 'js-yaml';
 import { HttpExceptionFilter } from './common/exceptions/http-exceptions.filter';
 import { ResponseInterceptor } from './common/interceptors/http-response.interceptor';
 import { MainModule } from './main.module';
@@ -16,7 +13,6 @@ async function bootstrap() {
   configureCors(app);
   configureGlobalSettings(app);
   handleProcessErrors(logger);
-  setupSwagger(app);
 
   const PORT = process.env.PORT || 3000;
   const HOST = process.env.HOST || '0.0.0.0';
@@ -55,11 +51,6 @@ function configureGlobalSettings(app: INestApplication) {
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter());
   app.setGlobalPrefix('api/v1');
-}
-
-function setupSwagger(app: INestApplication) {
-  const config = yaml.load(fs.readFileSync('docs/api.yaml', 'utf8')) as OpenAPIObject;
-  SwaggerModule.setup('api/v1/docs', app, config);
 }
 
 function handleProcessErrors(logger: Logger) {

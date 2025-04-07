@@ -1,6 +1,6 @@
 import { Controller, Get, Inject, Param, Post, Request, UseGuards } from '@nestjs/common';
-import { AuthenticatedRequest } from 'src/common/dtos/authenticated-request.dto';
-import { AuthGuard } from 'src/common/guards/auth.guard';
+import { AuthenticatedRequest } from '../../common/dtos/authenticated-request.dto';
+import { AuthGuard } from '../../common/guards/auth.guard';
 import { LikeDTO } from './dtos/output/like.dto';
 import { GetLikesByPostIdUseCase } from './use-cases/get-likes-by-post-id.usecase';
 import { ToggleLikeUseCase } from './use-cases/toggle-like.usecase';

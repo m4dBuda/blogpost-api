@@ -1,5 +1,5 @@
-import { BlogPostEntity } from 'src/modules/blogpost/blogpost.entity';
-import { UserEntity } from 'src/modules/user/user.entity';
+import { BlogPostEntity } from '../../../blogpost/blogpost.entity';
+import { UserEntity } from '../../../user/user.entity';
 import { LikeEntity } from '../../like.entity';
 
 export class LikeDTO {

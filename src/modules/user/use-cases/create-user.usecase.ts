@@ -1,5 +1,5 @@
 import { HttpException, Inject, Injectable } from '@nestjs/common';
-import { HashHelper } from 'src/common/helpers/hash.helper';
+import { HashHelper } from '../../../common/helpers/hash.helper';
 import { CreateUserDTO } from '../dtos/inputs/create-user.dto';
 import { UserCreatedDTO } from '../dtos/outputs/user-created.dto';
 import { IUserRepository } from '../interfaces/user-repository.interface';

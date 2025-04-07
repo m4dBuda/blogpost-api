@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IDatabaseConnection } from 'src/infrastructure/database/database-connection.interface';
+import { IDatabaseConnection } from '../../infrastructure/database/database-connection.interface';
 import { BlogPostEntity } from './blogpost.entity';
 import { BlogPostFilterDTO } from './dtos/inputs/blogpost-filter.dto';
 import { CreateBlogPostDTO } from './dtos/inputs/create-blogpost.dto';

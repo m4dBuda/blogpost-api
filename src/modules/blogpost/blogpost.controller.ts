@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Inject, Param, Post, Put, Query, Request, UseGuards } from '@nestjs/common';
-import { AuthenticatedRequest } from 'src/common/dtos/authenticated-request.dto';
-import { AuthGuard } from 'src/common/guards/auth.guard';
+import { AuthenticatedRequest } from '../../common/dtos/authenticated-request.dto';
+import { AuthGuard } from '../../common/guards/auth.guard';
 import { BlogPostFilterDTO } from './dtos/inputs/blogpost-filter.dto';
 import { CreateBlogPostDTO } from './dtos/inputs/create-blogpost.dto';
 import { UpdateBlogPostDTO } from './dtos/inputs/update-blogpost.dto';

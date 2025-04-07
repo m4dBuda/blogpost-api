@@ -111,92 +111,11 @@ Before starting, ensure you have the following tools installed:
    npm run start:dev
    ```
 
-2. The API will be available at: [http://localhost:3000](http://localhost:3000)
+2. The API will be available at: [http://localhost:3000](http://localhost:3000).
 
----
+3. The API uses the prefix `api/v1` to facilitate version control.
 
-## **How to Make Requests**
-
-### **Authentication**
-
-1. Register a new user:
-
-   **POST** `/user`
-
-   ```json
-   {
-     "name": "John Doe",
-     "email": "johndoe@example.com",
-     "password": "securepassword"
-   }
-   ```
-
-2. Log in to obtain the JWT token:
-
-   **POST** `/auth/login`
-
-   ```json
-   {
-     "email": "johndoe@example.com",
-     "password": "securepassword"
-   }
-   ```
-
-   **Response**:
-
-   ```json
-   {
-     "operation": "success",
-     "message": "Request successful",
-     "timestamp": "2025-04-07T00:24:55.174Z",
-     "token": "your-jwt-token"
-   }
-   ```
-
-3. Use the JWT token in the `Authorization` header to authenticate requests:
-
-   ```http
-   Authorization: Bearer your-jwt-token
-   ```
-
----
-
-### **Example Endpoints**
-
-#### **Create a Post**
-
-**POST** `/post`
-
-```json
-{
-  "title": "My First Post",
-  "content": "This is the content of my post.",
-  "published": true
-}
-```
-
-#### **List Posts**
-
-**GET** `/post`
-
----
-
-#### **Add a Comment**
-
-**POST** `/comment`
-
-```json
-{
-  "postId": "123e4567-e89b-12d3-a456-426614174000",
-  "content": "This is a comment."
-}
-```
-
----
-
-#### **Like a Post**
-
-**POST** `/like/:postId`
+4. A pre-configured API collection is available for testing and can be imported into [Insomnia](https://insomnia.rest/) or similar tools. The collection is located in the `docs/Insomnia_2025-04-07.har` file.
 
 ---
 
@@ -302,6 +221,33 @@ This project follows a clean and modular architecture, leveraging several best p
 - **Consistency**: DTOs and interceptors ensure uniform data handling and responses.
 
 This architecture ensures the API is robust, secure, and ready for future growth.
+
+---
+
+## **Future Improvements**
+
+As part of the continuous improvement of this API, I have outlined the following goals to enhance its functionality, maintainability, and scalability:
+
+1. **Logging System**:
+
+   - Implement a structured logging system to facilitate debugging and provide better insights into application behavior and errors.
+
+2. **Test Coverage**:
+
+   - Achieve at least 80% test coverage for the application, focusing on unit tests to ensure the reliability and robustness of the codebase.
+
+3. **Image Management System**:
+
+   - Develop a centralized image management system to handle uploads and storage for avatars, posts, and comments.
+
+4. **Audit System**:
+
+   - Create an audit system to track all sensitive actions and modifications within the application, ensuring accountability and transparency.
+
+5. **Design System and Documentation**:
+   - Build a design system and/or comprehensive documentation to define the architecture, conventions, and best practices used in the project.
+
+These improvements aim to make the API more robust, secure, and maintainable, while also providing a better developer experience.
 
 ## **Developer**
 

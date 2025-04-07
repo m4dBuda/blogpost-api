@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Inject, Post, Request, UseGuards } from '@nestjs/common';
-import { AuthenticatedRequest } from 'src/common/dtos/authenticated-request.dto';
-import { AuthGuard } from 'src/common/guards/auth.guard';
+import { AuthenticatedRequest } from '../../common/dtos/authenticated-request.dto';
+import { AuthGuard } from '../../common/guards/auth.guard';
 import { CreateUserDTO } from './dtos/inputs/create-user.dto';
 import { UserCreatedDTO } from './dtos/outputs/user-created.dto';
 import { UserDTO } from './dtos/outputs/user.dto';

@@ -1,6 +1,6 @@
-import { BlogPostEntity } from 'src/modules/blogpost/blogpost.entity';
-import { CommentEntity } from 'src/modules/comment/comment.entity';
-import { LikeEntity } from 'src/modules/like/like.entity';
+import { BlogPostEntity } from '../../../blogpost/blogpost.entity';
+import { CommentEntity } from '../../../comment/comment.entity';
+import { LikeEntity } from '../../../like/like.entity';
 import { UserEntity } from '../../user.entity';
 
 export class UserDTO {

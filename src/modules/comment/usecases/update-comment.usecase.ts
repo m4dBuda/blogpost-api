@@ -9,8 +9,8 @@ export class UpdateCommentUseCase {
   constructor(@Inject(CommentRepository) private readonly commentRepository: ICommentRepository) {}
 
   public async execute(id: string, data: UpdateCommentDTO): Promise<CommentDTO> {
+    await this.findCommentAndValidate(id, data.authorId);
     try {
-      await this.findCommentAndValidate(id, data.authorId);
       const response = await this.commentRepository.updateComment(id, data);
       const likeCount = response.post?.likes?.length;
       return new CommentDTO(response, { likeCount });

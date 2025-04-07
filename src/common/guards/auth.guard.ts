@@ -1,6 +1,6 @@
 import { CanActivate, ExecutionContext, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { IUserRepository } from 'src/modules/user/interfaces/user-repository.interface';
-import { UserRepository } from 'src/modules/user/user.repository';
+import { IUserRepository } from '../../modules/user/interfaces/user-repository.interface';
+import { UserRepository } from '../../modules/user/user.repository';
 import { TokenDTO } from '../dtos/token.dto';
 import { JwtHelper } from '../helpers/jwt.helper';
 

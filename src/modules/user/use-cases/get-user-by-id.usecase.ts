@@ -11,13 +11,13 @@ export class GetUserByIdUseCase {
   ) {}
 
   public async execute(id: string): Promise<UserDTO> {
+    const response = await this.userRepository.findById(id);
+
+    if (!response) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
     try {
-      const response = await this.userRepository.findById(id);
-
-      if (!response) {
-        throw new NotFoundException(`User with ID ${id} not found`);
-      }
-
       const postCount = response.posts?.length || 0;
       const likeCount = response.likes?.length || 0;
       const commentCount = response.comments?.length || 0;

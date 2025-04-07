@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IDatabaseConnection } from 'src/infrastructure/database/database-connection.interface';
+import { IDatabaseConnection } from '../../infrastructure/database/database-connection.interface';
 import { CreateUserDTO } from './dtos/inputs/create-user.dto';
 import { IUserRepository } from './interfaces/user-repository.interface';
 import { UserEntity } from './user.entity';

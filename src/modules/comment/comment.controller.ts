@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Inject, Param, Post, Put, Request, UseGuards } from '@nestjs/common';
-import { AuthenticatedRequest } from 'src/common/dtos/authenticated-request.dto';
-import { AuthGuard } from 'src/common/guards/auth.guard';
+import { AuthenticatedRequest } from '../../common/dtos/authenticated-request.dto';
+import { AuthGuard } from '../../common/guards/auth.guard';
 import { CreateCommentDTO } from './dtos/inputs/create-comment.dto';
 import { UpdateCommentDTO } from './dtos/inputs/update-comment.dto';
 import { CommentDTO } from './dtos/outputs/comment.dto';

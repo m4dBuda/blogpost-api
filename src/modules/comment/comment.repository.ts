@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IDatabaseConnection } from 'src/infrastructure/database/database-connection.interface';
+import { IDatabaseConnection } from '../../infrastructure/database/database-connection.interface';
 import { CommentEntity } from './comment.entity';
 import { ICommentRepository } from './interfaces/comment-repository.interface';
 

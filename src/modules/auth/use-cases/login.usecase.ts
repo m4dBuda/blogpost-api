@@ -1,9 +1,9 @@
 import { HttpException, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { HashHelper } from 'src/common/helpers/hash.helper';
-import { JwtHelper } from 'src/common/helpers/jwt.helper';
-import { IUserRepository } from 'src/modules/user/interfaces/user-repository.interface';
-import { UserEntity } from 'src/modules/user/user.entity';
-import { UserRepository } from 'src/modules/user/user.repository';
+import { HashHelper } from '../../../common/helpers/hash.helper';
+import { JwtHelper } from '../../../common/helpers/jwt.helper';
+import { IUserRepository } from '../../user/interfaces/user-repository.interface';
+import { UserEntity } from '../../user/user.entity';
+import { UserRepository } from '../../user/user.repository';
 import { LoginDTO } from '../dtos/inputs/login.dto';
 import { AuthDTO } from '../dtos/outputs/auth.dto';
 
