@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { TokenDTO } from '../dtos/token.dto';
 
 @Injectable()
 export class JwtHelper {
@@ -35,7 +36,7 @@ export class JwtHelper {
    * @param token - The JWT token to verify.
    * @returns The decoded payload if the token is valid.
    */
-  public verifyToken(token: string): object {
+  public verifyToken(token: string): TokenDTO {
     return this.jwtService.verify(token, { secret: this.secret });
   }
 }

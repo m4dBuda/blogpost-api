@@ -5,47 +5,25 @@ import { UserEntity } from '../user/user.entity';
 export class BlogPostEntity {
   id: string;
   title: string;
-  content?: string;
+  content: string;
   published: boolean;
   authorId: string;
-  author?: UserEntity;
-  comments?: CommentEntity[];
-  likes?: LikeEntity[];
   createdAt: Date;
   updatedAt: Date;
+  author?: Partial<UserEntity> | null;
+  comments?: Partial<CommentEntity>[];
+  likes?: Partial<LikeEntity>[];
 
-  constructor({
-    id,
-    title,
-    content,
-    published,
-    authorId,
-    author,
-    comments,
-    likes,
-    createdAt,
-    updatedAt,
-  }: {
-    id: string;
-    title: string;
-    content?: string;
-    published: boolean;
-    authorId: string;
-    author?: UserEntity;
-    comments?: CommentEntity[];
-    likes?: LikeEntity[];
-    createdAt: Date;
-    updatedAt: Date;
-  }) {
-    this.id = id;
-    this.title = title;
-    this.content = content;
-    this.published = published;
-    this.authorId = authorId;
-    this.author = author;
-    this.comments = comments;
-    this.likes = likes;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+  constructor(data: BlogPostEntity) {
+    this.id = data.id!;
+    this.title = data.title!;
+    this.content = data.content!;
+    this.published = data.published!;
+    this.authorId = data.authorId!;
+    this.createdAt = data.createdAt!;
+    this.updatedAt = data.updatedAt!;
+    this.author = data.author;
+    this.comments = data.comments;
+    this.likes = data.likes;
   }
 }

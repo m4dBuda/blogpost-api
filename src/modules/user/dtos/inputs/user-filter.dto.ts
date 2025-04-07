@@ -1,4 +1,11 @@
+import { IsOptional, IsString } from 'class-validator';
+
 export class UserFilterDTO {
-  name?: string | null;
-  email?: string | null;
+  @IsString()
+  @IsOptional()
+  name?: string;
+
+  @IsString()
+  @IsOptional()
+  email?: string;
 }

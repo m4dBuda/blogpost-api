@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { CreateUserDTO } from './dtos/inputs/create-user.dto';
 import { UserCreatedDTO } from './dtos/outputs/user-created.dto';
+import { UserDTO } from './dtos/outputs/user.dto';
 import { CreateUserUseCase } from './use-cases/create-user.usecase';
 import { GetUserByIdUseCase } from './use-cases/get-user-by-id.usecase';
-import { UserEntity } from './user.entity';
 
 @Controller('user')
 export class UserController {
@@ -18,7 +18,7 @@ export class UserController {
   }
 
   @Get(':id')
-  public async getById(@Param('id') id: string): Promise<UserEntity> {
+  public async getById(@Param('id') id: string): Promise<UserDTO> {
     return this.$getById.execute(id);
   }
 }

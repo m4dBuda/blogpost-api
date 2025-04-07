@@ -17,9 +17,38 @@ export class UserRepository implements IUserRepository {
   }
 
   public async findById(id: string): Promise<UserEntity | null> {
-    return this.$db.user.findUnique({
+    const user = await this.$db.user.findUnique({
       where: { id },
+      include: {
+        posts: {
+          select: {
+            id: true,
+            title: true,
+            content: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+        comments: {
+          select: {
+            id: true,
+            content: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+        likes: {
+          select: {
+            id: true,
+            postId: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+      },
     });
+
+    return user;
   }
 
   public async findByEmail(email: string): Promise<UserEntity | null> {

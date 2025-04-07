@@ -1,6 +1,6 @@
 export interface ApiResponse<T = any> {
   operation: 'success' | 'error';
-  message: string;
+  message: string | string[];
   timestamp: string;
   path?: string;
   data?: T;
@@ -15,12 +15,12 @@ export function createSuccessResponse<T>(data: T, message = 'Request successful'
   };
 }
 
-export function createErrorResponse(message: string, path?: string, data?: any): ApiResponse {
+export function createErrorResponse(message: string | string[], path?: string, data?: any): ApiResponse {
   return {
     operation: 'error',
     message,
     timestamp: new Date().toISOString(),
     path,
-    data,
+    data: data && typeof data === 'object' ? { ...data, message: undefined } : data,
   };
 }

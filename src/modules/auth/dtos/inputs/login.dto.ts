@@ -1,9 +1,11 @@
-export class LoginDTO {
-  email: string;
-  password: string;
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
-  constructor(email: string, password: string) {
-    this.email = email;
-    this.password = password;
-  }
+export class LoginDTO {
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
 }

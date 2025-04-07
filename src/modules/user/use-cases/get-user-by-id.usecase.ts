@@ -1,6 +1,6 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { UserDTO } from '../dtos/outputs/user.dto';
 import { IUserRepository } from '../interfaces/user-repository.interface';
-import { UserEntity } from '../user.entity';
 import { UserRepository } from '../user.repository';
 
 @Injectable()
@@ -10,15 +10,25 @@ export class GetUserByIdUseCase {
     private readonly userRepository: IUserRepository,
   ) {}
 
-  public async execute(id: string): Promise<UserEntity> {
+  public async execute(id: string): Promise<UserDTO> {
     try {
-      const user = await this.userRepository.findById(id);
-      if (!user) {
-        throw new Error(`User with ID ${id} not found`);
+      const response = await this.userRepository.findById(id);
+
+      if (!response) {
+        throw new NotFoundException(`User with ID ${id} not found`);
       }
-      return user;
+
+      const postCount = response.posts?.length || 0;
+      const likeCount = response.likes?.length || 0;
+      const commentCount = response.comments?.length || 0;
+
+      return new UserDTO(response, {
+        postCount,
+        likeCount,
+        commentCount,
+      });
     } catch (error) {
-      throw new Error(`Error retrieving user: ${error.message}`);
+      throw new InternalServerErrorException(`Error retrieving user: ${error.message}`);
     }
   }
 }

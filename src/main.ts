@@ -31,18 +31,10 @@ bootstrap().catch((error) => {
   process.exit(1);
 });
 
-/**
- * Configures security-related middlewares like Helmet and Compression.
- * @param app - The NestJS application instance.
- */
 function configureSecurity(app: INestApplication) {
   app.use(helmet());
 }
 
-/**
- * Configures CORS settings for the application.
- * @param app - The NestJS application instance.
- */
 function configureCors(app: INestApplication) {
   app.enableCors({
     origin: process.env.CORS_ORIGIN || '*',
@@ -51,20 +43,17 @@ function configureCors(app: INestApplication) {
   });
 }
 
-/**
- * Configures global settings like interceptors, filters, and pipes.
- * @param app - The NestJS application instance.
- */
 function configureGlobalSettings(app: INestApplication) {
-  app.useGlobalInterceptors(new ResponseInterceptor());
-  app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalPipes(
     new ValidationPipe({
+      transform: true,
       whitelist: true,
       forbidNonWhitelisted: true,
-      transform: true,
     }),
   );
+
+  app.useGlobalInterceptors(new ResponseInterceptor());
+  app.useGlobalFilters(new HttpExceptionFilter());
   app.setGlobalPrefix('api/v1');
 }
 
@@ -73,10 +62,6 @@ function setupSwagger(app: INestApplication) {
   SwaggerModule.setup('api/v1/docs', app, config);
 }
 
-/**
- * Handles uncaught exceptions and unhandled promise rejections.
- * @param logger - The logger instance.
- */
 function handleProcessErrors(logger: Logger) {
   process.on('uncaughtException', (err) => {
     logger.error('Uncaught Exception:', err);

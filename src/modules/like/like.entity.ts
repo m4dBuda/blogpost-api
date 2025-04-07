@@ -4,35 +4,19 @@ import { UserEntity } from '../user/user.entity';
 export class LikeEntity {
   id: string;
   postId: string;
-  post: BlogPostEntity;
   userId: string;
-  user: UserEntity;
   createdAt: Date;
   updatedAt: Date;
+  user?: Partial<UserEntity>;
+  post?: Partial<BlogPostEntity>;
 
-  constructor({
-    id,
-    postId,
-    post,
-    userId,
-    user,
-    createdAt,
-    updatedAt,
-  }: {
-    id: string;
-    postId: string;
-    post: BlogPostEntity;
-    userId: string;
-    user: UserEntity;
-    createdAt: Date;
-    updatedAt: Date;
-  }) {
-    this.id = id;
-    this.postId = postId;
-    this.post = post;
-    this.userId = userId;
-    this.user = user;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+  constructor(data: LikeEntity) {
+    this.id = data.id!;
+    this.postId = data.postId!;
+    this.userId = data.userId!;
+    this.createdAt = data.createdAt!;
+    this.updatedAt = data.updatedAt!;
+    this.post = data.post;
+    this.user = data.user;
   }
 }
